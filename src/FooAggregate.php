@@ -8,6 +8,7 @@ use Ecotone\Modelling\Attribute\EventHandler;
 use Ecotone\Modelling\Attribute\Identifier;
 use Ecotone\Modelling\CommandBus;
 use Ecotone\Modelling\WithEvents;
+use PHPUnit\Event\RuntimeException;
 
 #[Aggregate]
 class FooAggregate
@@ -37,6 +38,9 @@ class FooAggregate
     #[CommandHandler()]
     public function activate(ActivateFooCommand $command, FooRepository $fooRepository): void
     {
-
+        $foo = $fooRepository->findBy(self::class, [$command->identifier]);
+        if(!$foo instanceof FooAggregate) {
+            throw new RuntimeException('Foo not found');
+        }
     }
 }
