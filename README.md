@@ -1,3 +1,5 @@
+> :warning: **Archived, due to the issue probably being more of an issue regarding the Aggregate design**
+
 ```bash
 ❯ vendor/bin/phpunit
 There was 1 error:
